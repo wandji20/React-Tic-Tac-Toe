@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import Board from './Board';
-import { calculateWinner } from './helper';
+import calculateWinner from './helper';
 
 export default class Game extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      history: [{squares: Array(9).fill(null)}],
+      history: [{ squares: Array(9).fill(null) }],
       xIsNext: true,
 
-    }
+    };
   }
 
   handleClick(i) {
-    let { history, xIsNext } = this.state;
-    const current = history[history.length -1]
-    let squares = current.squares.slice()
+    const { history, xIsNext } = this.state;
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
 
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     const oIsNext = !xIsNext;
     squares[i] = xIsNext ? 'X' : 'O';
-    let newHistory = history.concat([{
-      squares: squares
-    }])
+    const newHistory = history.concat([{
+      squares,
+    }]);
 
     this.setState(() => ({
       history: newHistory,
@@ -32,12 +32,10 @@ export default class Game extends Component {
     }));
   }
 
-
   render() {
     const { history, xIsNext } = this.state;
-    const current = history[history.length -1]
+    const current = history[history.length - 1];
     const winner = calculateWinner(current.squares);
-    console.log(winner)
     let status;
     if (winner) {
       status = `Winner: ${winner}`;
@@ -48,11 +46,15 @@ export default class Game extends Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board status = {status} squares = {current.squares} handleClick = {(i)=>{this.handleClick(i)}} />
+          <Board
+            status={status}
+            squares={current.squares}
+            handleClick={(i) => { this.handleClick(i); }}
+          />
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol></ol>
+          <ol />
         </div>
       </div>
     );

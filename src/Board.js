@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 import Square from './Square';
+/* eslint-disable react/prop-types */
 
 export default class Board extends Component {
-
   renderSquare(i) {
-    const { squares } = this.props;
-    return <Square value = {squares[i]} handleClick={() => { this.props.handleClick(i); }} />;
+    const { squares, handleClick } = this.props;
+    return <Square value={squares[i]} handleClick={() => { handleClick(i); }} />;
   }
 
   render() {
-
     return (
       <div>
         <div className="board-row">
@@ -31,3 +31,7 @@ export default class Board extends Component {
     );
   }
 }
+// Board.propTypes = {
+//   squares: PropTypes.array,
+//   handleClick: PropTypes.func,
+// };
