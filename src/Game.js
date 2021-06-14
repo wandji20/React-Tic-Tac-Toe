@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Board from './Board'
+import React, { Component } from 'react';
+import Board from './Board';
 
 export default class Game extends Component {
   render() {
@@ -9,10 +9,10 @@ export default class Game extends Component {
           <Board />
         </div>
         <div className="game-info">
-          <div></div>
-          <ol></ol>
+          <div />
+          <ol />
         </div>
       </div>
-    )
+    );
   }
 }
