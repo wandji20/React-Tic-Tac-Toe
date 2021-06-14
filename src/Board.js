@@ -5,26 +5,27 @@ export default class Board extends Component {
   constructor(props){
     super(props)
     this.state = {
-      squares : Array(9).fill(null)
+      squares : Array(9).fill(null),
+      xIsNext: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(i){
     let newSquares = this.state.squares.slice()
-    newSquares[i] = 'X'
+    newSquares[i] = this.state.xIsNext ? 'X' : 'O'
     this.setState({
-      squares: newSquares
+      squares: newSquares,
+      xIsNext: !this.state.xIsNext
     })
-    // console.log(`${i}`)
+    
   }
 
   renderSquare(i){
     return <Square value = {this.state.squares[i]} handleClick = {()=>{this.handleClick(i)}} />
   }
   render() {
-    // console.log(this.state.squares)
-    const status = 'Next Player: X'
+    const status = `Next Player: ${this.state.xIsNext ? "X" : "O"}`
     return (
       <div>
         <div className="status">{status}</div>
@@ -47,3 +48,4 @@ export default class Board extends Component {
     )
   }
 }
+
